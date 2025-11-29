@@ -87,3 +87,4 @@ next_session_prompt: |
   3. Claude.ai generates 5 project instructions (~500 chars each)
   4. User updates keyboard shortcuts to jsDelivr URLs
   5. Deploy to production use
+
