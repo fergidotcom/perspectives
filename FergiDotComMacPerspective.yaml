@@ -1,90 +1,97 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T22:30:00Z"
+timestamp: "2025-11-29T22:45:00Z"
 
 session_summary: |
-  Two-Claude infrastructure FULLY VERIFIED. GitHub + jsDelivr CDN provides reliable
-  perspective sharing. Round-trip tests passed (Douglas Adams + Monty Python).
-  Cache purging discovered: GET to purge.jsdelivr.net clears CDN cache instantly.
+  ECOSYSTEM REVIEW conducted. Surveyed all 7 projects. Overall health: STABLE.
+  Created comprehensive ARCHIVE_SYSTEM.md for ecosystem evolution tracking.
+  Set up Session-Archive and Evolution-Archive directory structures.
+  User approved: 1) Archive system design 2) Refs→Linode migration 3) Environment cleanup
 
-test_validation:
-  secret_phrase: "Life, The Universe and Everything!"
-  expected_response: "The answer is 42"
-  status: "PASSED ✓"
+work_completed:
+  files_created:
+    - path: "ARCHIVE_SYSTEM.md"
+      description: "Comprehensive archive strategy for periodic evaluation and refinement"
 
-final_verification:
-  question: "What is the airspeed velocity of an unladen swallow?"
-  expected: "African or European?"
-  status: "PENDING - awaiting Claude.ai fetch"
+  directories_created:
+    - "Session-Archive/2025-Q4/FamilyArchive/"
+    - "Session-Archive/2025-Q4/Cooking/"
+    - "Session-Archive/2025-Q4/ReferenceRefinement/"
+    - "Session-Archive/2025-Q4/FergiDotCom/"
+    - "Session-Archive/2025-Q4/VideoDev/"
+    - "Session-Archive/2025-Q4/CaughtInTheAct/"
+    - "Evolution-Archive/reviews/"
+    - "Evolution-Archive/decisions/"
+    - "Evolution-Archive/migrations/"
 
-infrastructure_verified:
-  github_repo: "fergidotcom/perspectives"
-  visibility: "PUBLIC"
+  ecosystem_review_findings:
+    overall_health: "STABLE"
+    projects_surveyed: 7
+    production_deployments: 3
 
-  cdn_urls:
-    primary: "https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/"
-    fallback: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/"
+    project_status:
+      FergiDotCom: "Stable - Two-Claude infrastructure verified"
+      FergusonFamilyArchive: "Stable - v2.2-leaderboard live, Phase 3 ready"
+      ReferenceRefinement: "Stable - v16.10 OAuth fix deployed, awaiting Linode migration"
+      Cooking: "Stable - v5.1.1 recipe quality overhaul complete"
+      VideoDev: "Early Stage - Survey phase pending Pegasus access"
+      PsychotherapyAds: "Early Stage - Content/creative focus"
+      CaughtInTheActConverters: "Early Stage - Setup complete, awaiting Phase 1"
 
-  cache_purge:
-    method: "GET (not POST)"
-    url: "https://purge.jsdelivr.net/gh/fergidotcom/perspectives@main/[FileName]"
-    result: "Instant cache clear on both CF and FY providers"
+    identified_issues:
+      - "CLAUDE.md dates stale in several projects"
+      - "Duplicate CLAUDE.md in infrastructure-dashboard (needs removal)"
+      - "Reference Refinement still on Netlify (approved for Linode migration)"
+      - "158 session summaries across ecosystem (need archival)"
 
-  files_on_github:
-    - FergiDotComMacPerspective.yaml
-    - FamilyArchiveMacPerspective.yaml
-    - ReferenceRefinementMacPerspective.yaml
-    - CookingMacPerspective.yaml
-    - VideoDevMacPerspective.yaml
+current_state:
+  status: "in_progress"
 
-workflow_established:
-  mac_creates_perspective:
-    1: "Mac creates ~/Downloads/[Project]MacPerspective.yaml"
-    2: "Copy to perspectives-sync directory"
-    3: "git add, commit, push to GitHub"
-    4: "Optionally purge jsDelivr cache for instant availability"
+  completed_tasks:
+    - "Surveyed all 7 projects"
+    - "Created ARCHIVE_SYSTEM.md"
+    - "Set up archive directory structure"
 
-  claude_ai_fetches:
-    1: "User says: fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/[Project]MacPerspective.yaml"
-    2: "Claude.ai retrieves and reads Mac's perspective"
-    3: "Claude.ai responds with guidance/instructions"
+  remaining_tasks:
+    - "Create Reference Refinement Linode migration plan"
+    - "Remove duplicate CLAUDE.md from infrastructure-dashboard"
+    - "Update ECOSYSTEM_EVOLUTION_LOG.md with review findings"
+    - "Archive session summaries older than 30 days"
 
-  claude_ai_creates_perspective:
-    1: "User says 'checkpoint' in Claude.ai"
-    2: "Claude.ai generates [Project]ClaudePerspective.yaml artifact"
-    3: "User downloads to ~/Downloads"
-    4: "Mac runs /fetch to read and execute instructions"
+context_notes:
+  - "User approved Refs→Linode migration IMMEDIATELY"
+  - "User wants clean environment - discretion granted for cleanup"
+  - "Archive system designed for evolutionary refinement"
+  - "Perspective archives already working in Perspective-Archive/"
+  - "Need to consolidate duplicate Reference Refinement CLAUDE.md"
 
-pending_from_claude_ai:
-  1: "Confirm Monty Python verification (African or European?)"
-  2: "Generate Global Preferences text (~2000 chars for Settings > Preferences)"
-  3: "Generate 5 project instruction texts (~500 chars each)"
-  4: "Update keyboard shortcuts to use jsDelivr URLs"
+next_steps:
+  priority_1_immediate:
+    - "Create REFS_LINODE_MIGRATION_PLAN.md in Evolution-Archive/migrations/"
+    - "Delete duplicate CLAUDE.md from fergi-infrastructure-dashboard"
 
-fetch_commands_for_claude_ai:
-  FergiDotCom: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/FergiDotComMacPerspective.yaml"
-  FamilyArchive: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/FamilyArchiveMacPerspective.yaml"
-  ReferenceRefinement: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/ReferenceRefinementMacPerspective.yaml"
-  Cooking: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/CookingMacPerspective.yaml"
-  VideoDev: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/VideoDevMacPerspective.yaml"
+  priority_2_session:
+    - "Update ECOSYSTEM_EVOLUTION_LOG.md with today's review"
+    - "Archive old session summaries to Session-Archive/2025-Q4/"
 
-next_session_prompt: |
-  Continue FergiDotCom Two-Claude infrastructure session.
+  priority_3_refs_migration:
+    - "Reference Refinement has 7 Netlify Functions to convert"
+    - "Functions: health, llm-chat, llm-rank, search-google, dropbox-oauth, resolve-urls, proxy-fetch"
+    - "Follow Cooking migration pattern (Express.js server)"
+    - "Deploy to Linode at refs.fergi.com or similar"
 
-  VERIFIED WORKING:
-  - GitHub repo fergidotcom/perspectives (PUBLIC)
-  - jsDelivr CDN for cache-free fetching
-  - Cache purge via GET to purge.jsdelivr.net
-  - Round-trip communication (Mac → GitHub → Claude.ai)
+refs_migration_notes: |
+  Reference Refinement uses:
+  - 7 TypeScript Netlify Functions
+  - Dropbox OAuth with PKCE (same as Cooking)
+  - Anthropic Claude API (same as Cooking)
+  - Google Custom Search API (unique to Refs)
 
-  COMPLETED TESTS:
-  - Douglas Adams: "Life, The Universe and Everything!" → 42 ✓
-  - Monty Python: "Airspeed velocity of unladen swallow?" → "African or European?"
+  Migration pattern from Cooking applies:
+  1. Create Express server consolidating all functions
+  2. Create systemd service file
+  3. Create nginx reverse proxy config
+  4. Create deployment script
+  5. Test locally, deploy, verify
 
-  NEXT STEPS:
-  1. Verify Claude.ai sees Monty Python question
-  2. Claude.ai generates Global Preferences (~2000 chars)
-  3. Claude.ai generates 5 project instructions (~500 chars each)
-  4. User updates keyboard shortcuts to jsDelivr URLs
-  5. Deploy to production use
-
+session_ended_reason: "User on airplane - immediate shutdown required"
