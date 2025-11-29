@@ -1,47 +1,47 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T17:20:00Z"
+timestamp: "2025-11-29T17:30:00Z"
 
 session_summary: |
-  Implemented GitHub-based perspective sharing. Claude.ai discovered
-  refs.fergi.com blocked from web_fetch. Created fergidotcom/perspectives
-  repo and push script. Fixed script to clean up Downloads after push.
+  Verified GitHub repo is PUBLIC and all files accessible. Claude.ai's
+  web_fetch requires user-provided URLs (repo too new for search indexing).
 
-work_completed:
-  - "Created GitHub repo: fergidotcom/perspectives"
-  - "Created push-perspective-github.sh script"
-  - "Pushed all 5 MacPerspective files to GitHub"
-  - "Fixed script to delete from Downloads after successful push"
-  - "Cleaned up stale MacPerspective files from Downloads"
+verification_results:
+  repo: "fergidotcom/perspectives"
+  visibility: "PUBLIC"
+  branch: "main"
+  files_present:
+    - "FergiDotComMacPerspective.yaml"
+    - "FamilyArchiveMacPerspective.yaml"
+    - "ReferenceRefinementMacPerspective.yaml"
+    - "CookingMacPerspective.yaml"
+    - "VideoDevMacPerspective.yaml"
+  raw_url_test: "HTTP 200"
+
+working_raw_urls:
+  FergiDotCom: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
+  FamilyArchive: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
+  ReferenceRefinement: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
+  Cooking: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
+  VideoDev: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
 
 current_state:
   status: "active"
-  fetch_infrastructure: "GitHub raw URLs"
+  infrastructure: "Complete and verified"
+  blocker: "Claude.ai web_fetch security model requires user-provided URLs"
 
-  fetch_urls:
-    FergiDotCom: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
-    FamilyArchive: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
-    ReferenceRefinement: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
-    Cooking: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
-    VideoDev: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
+for_claude_ai:
+  confirmation: "Repo is PUBLIC, all URLs return HTTP 200"
 
-  script_workflow:
-    command: "./push-perspective-github.sh [ProjectName]"
-    actions:
-      - "Archives to Perspective-Archive/MacPerspectives/ with timestamp"
-      - "Copies to perspectives-sync repo"
-      - "Commits and pushes to GitHub"
-      - "Deletes from Downloads"
+  workaround: |
+    User must paste URL in chat to make it "user-provided":
+    fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml
 
-awaiting_from_user:
-  - "Update Claude.ai Global Preferences with optimized content"
-  - "Update each project's Custom Instructions"
-  - "Test fetch command in Claude.ai"
+for_user:
+  action: "Paste the fetch command with full URL in Claude.ai chat"
+  example: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
 
 next_steps:
-  for_claude_ai:
-    - "Confirm GitHub fetch URLs work"
-    - "Provide optimized instructions if not already done"
-  for_user:
-    - "Apply optimized instructions to Claude.ai"
-    - "Test fetch in new conversation"
+  - "User tests fetch with pasted URL in Claude.ai"
+  - "If works, update project instructions with this workaround"
+  - "Long-term: repo may become searchable after GitHub indexes it"
