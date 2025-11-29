@@ -1,56 +1,104 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T20:22:00Z"
+timestamp: "2025-11-29T21:30:00Z"
 
 session_summary: |
-  GitHub fetch workflow verified working by Claude.ai. This checkpoint
-  includes sync verification math question and pending task for
-  concise project instructions.
+  Major infrastructure session establishing Two-Claude perspective sharing via GitHub.
+  Claude.ai cannot fetch from Linode (blocked). GitHub raw URLs work but may cache.
+  Text replacement shortcuts created for user convenience.
 
-sync_verification:
-  math_question: "What is 5 + 37 + 42?"
-  expected_answer: 84
-  purpose: "If Claude.ai answers 84, sync is verified working"
+work_completed:
+  github_infrastructure:
+    repo: "fergidotcom/perspectives"
+    visibility: "PUBLIC"
+    branch: "main"
+    files:
+      - FergiDotComMacPerspective.yaml
+      - FamilyArchiveMacPerspective.yaml
+      - ReferenceRefinementMacPerspective.yaml
+      - CookingMacPerspective.yaml
+      - VideoDevMacPerspective.yaml
 
-current_state:
-  status: "active"
-  fetch_infrastructure: "VERIFIED WORKING"
-  github_repo: "fergidotcom/perspectives"
+  scripts_created:
+    push_script:
+      path: "~/Library/CloudStorage/Dropbox/Fergi/push-perspective-github.sh"
+      usage: "./push-perspective-github.sh [ProjectName]"
+      actions:
+        - "Archives to Perspective-Archive/MacPerspectives/"
+        - "Pushes to GitHub"
+        - "Deletes from Downloads"
 
-pending_task:
-  name: "Generate Optimized Claude.ai Instructions"
-  status: "Awaiting Claude.ai to generate"
+  text_replacements:
+    plist: "~/Downloads/FergiFetchShortcuts.plist (user imported)"
+    shortcuts:
+      FetchFergi: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
+      FetchArchive: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
+      FetchReferences: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
+      FetchCooking: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
+      FetchVideo: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
 
-  deliverables:
-    1: "Global System > Preferences (~2000 chars)"
-    2: "FergiDotCom project instructions (~500 chars)"
-    3: "FamilyArchive project instructions (~500 chars)"
-    4: "ReferenceRefinement project instructions (~500 chars)"
-    5: "Cooking project instructions (~500 chars)"
-    6: "VideoDev project instructions (~500 chars)"
+  linode_setup:
+    robots_txt: "Added to /var/www/html/ and /var/www/refs.fergi.com/"
+    symlink: "/var/www/html/perspectives -> /var/www/perspectives"
+    status: "Returns 301, may need nginx config adjustment"
 
-  guidance:
-    global_preferences:
-      - "Two-Claude workflow (Claude.ai plans, Mac implements)"
-      - "Fetch/checkpoint commands"
-      - "YAML perspective structure"
-      - "SILENCE principle"
-      - "Authority guidelines"
-      - "GitHub infrastructure for perspectives"
+known_issues:
+  github_caching:
+    problem: "raw.githubusercontent.com may cache for several minutes"
+    workaround: "Add ?v=N query parameter to bust cache"
 
-    per_project:
-      - "Project name and role"
-      - "Fetch URL"
-      - "Current status"
-      - "Key focus areas"
-      - "NO workflow mechanics (already in global)"
+  linode_blocked:
+    problem: "Claude.ai cannot fetch from refs.fergi.com or 96.126.113.99"
+    reason: "Not in Claude.ai's allowed domains list"
+    workaround: "User must paste URL in chat for it to work"
 
-for_claude_ai:
-  immediate_action: "Answer the math question to verify sync"
-  then: "Generate the 6 text blocks for optimized instructions"
+  sync_verification_pending:
+    math_question: "5 + 37 + 42 = ?"
+    expected: 84
+    status: "Claude.ai getting cached version, hasn't seen math question yet"
 
-next_steps:
-  1: "Claude.ai answers: 5 + 37 + 42 = ?"
-  2: "If 84, sync verified"
-  3: "Claude.ai generates 6 instruction text blocks"
-  4: "User copies to Claude.ai Settings and Projects"
+pending_tasks:
+  1: "Claude.ai to generate optimized Global Preferences (~2000 chars)"
+  2: "Claude.ai to generate 5 concise project instructions (~500 chars each)"
+  3: "User to copy instructions to Claude.ai Settings and Projects"
+  4: "Verify sync with math question once cache clears"
+
+infrastructure_summary:
+  mac_checkpoint_workflow:
+    1: "Mac creates perspective in ~/Downloads/[Project]MacPerspective.yaml"
+    2: "Mac runs: ./push-perspective-github.sh [ProjectName]"
+    3: "Script archives, pushes to GitHub, cleans Downloads"
+
+  claude_ai_fetch_workflow:
+    1: "User types FetchX shortcut (expands to full URL)"
+    2: "Claude.ai fetches from raw.githubusercontent.com"
+    3: "May need cache-buster if recently updated"
+
+  perspectives_locations:
+    primary: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/"
+    backup: "https://refs.fergi.com/perspectives/ (Mac curl only, Claude.ai blocked)"
+
+next_session_prompt: |
+  Continue FergiDotCom Two-Claude infrastructure session.
+
+  COMPLETED:
+  - GitHub repo fergidotcom/perspectives created (PUBLIC)
+  - push-perspective-github.sh script working
+  - Text replacement shortcuts imported (FetchFergi, etc.)
+  - All 5 MacPerspective files on GitHub
+
+  IN PROGRESS:
+  - Claude.ai seeing cached GitHub version (timestamp 2025-11-29T17:30:00Z)
+  - Current version has timestamp 2025-11-29T20:22:00Z with math question 5+37+42=84
+  - Need to verify sync once cache clears
+
+  PENDING:
+  - Claude.ai to generate optimized instructions:
+    * Global Preferences (~2000 chars)
+    * 5 project instructions (~500 chars each)
+
+  NEXT STEPS:
+  1. Have Claude.ai fetch again (may need ?v=3 cache buster)
+  2. Verify sync with math answer (84)
+  3. Get Claude.ai to generate the 6 instruction text blocks
+  4. User copies to Claude.ai Settings and Projects
