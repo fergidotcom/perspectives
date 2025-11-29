@@ -1,83 +1,61 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T15:10:00Z"
+timestamp: "2025-11-29T17:00:00Z"
 
 session_summary: |
-  Processed Claude.ai perspective about fetch workflow fix.
-  Fixed Linode paths - all 5 MacPerspective files now served from /var/www/perspectives/
-  All fetch URLs verified working (HTTP 200).
+  Implemented GitHub-based perspective sharing as Claude.ai discovered
+  refs.fergi.com is blocked from web_fetch. Created fergidotcom/perspectives
+  repo and push script. All 5 MacPerspective files now accessible via
+  raw.githubusercontent.com.
 
 work_completed:
-  - "Archived FergiDotComClaudePerspective.yaml"
-  - "Discovered path mismatch: nginx points to /var/www/perspectives/ not /var/www/refs.fergi.com/perspectives/"
-  - "Copied all 5 MacPerspective files to correct path"
-  - "Verified all 5 URLs return HTTP 200"
+  github_infrastructure:
+    - "Created repo: https://github.com/fergidotcom/perspectives"
+    - "Created push-perspective-github.sh script in Fergi directory"
+    - "Pushed all 5 MacPerspective files to GitHub"
+    - "Verified all 5 raw URLs return HTTP 200"
+
+  script_created:
+    path: "~/Library/CloudStorage/Dropbox/Fergi/push-perspective-github.sh"
+    usage: "./push-perspective-github.sh [ProjectName]"
+    features:
+      - "Copies perspective to GitHub repo"
+      - "Archives to Perspective-Archive/MacPerspectives/ with timestamp"
+      - "Commits and pushes to GitHub"
 
 current_state:
   status: "active"
-  all_perspectives_accessible:
-    - "https://refs.fergi.com/perspectives/FergiDotComMacPerspective.yaml"
-    - "https://refs.fergi.com/perspectives/FamilyArchiveMacPerspective.yaml"
-    - "https://refs.fergi.com/perspectives/ReferenceRefinementMacPerspective.yaml"
-    - "https://refs.fergi.com/perspectives/CookingMacPerspective.yaml"
-    - "https://refs.fergi.com/perspectives/VideoDevMacPerspective.yaml"
+  fetch_infrastructure: "GitHub (replaces Linode for Claude.ai access)"
 
-  correct_linode_path: "/var/www/perspectives/"
-  incorrect_path_to_avoid: "/var/www/refs.fergi.com/perspectives/"
+  new_fetch_urls:
+    FergiDotCom: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
+    FamilyArchive: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
+    ReferenceRefinement: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
+    Cooking: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
+    VideoDev: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
+
+  linode_status: "Still works for direct curl, but Claude.ai cannot access"
+
+awaiting_from_user:
+  - "Update Claude.ai Global Preferences with optimized content"
+  - "Update each project's Custom Instructions with concise version"
+  - "Test fetch command in Claude.ai"
 
 for_claude_ai:
-  priority: "HIGH"
-  task: "Optimize Project Instructions for Efficiency"
+  confirmation: "GitHub infrastructure complete and tested"
 
-  request: |
-    Generate MORE CONCISE Project Instructions for each of the 5 projects.
-    The current instructions have too much overhead. Minimize verbosity while
-    still properly conditioning each project.
+  fetch_command_update: |
+    Update fetch protocol to use GitHub URLs:
+    https://raw.githubusercontent.com/fergidotcom/perspectives/main/[ProjectName]MacPerspective.yaml
 
-  optimization_strategy:
-    step_1: "Move shared content to Global Settings > Preferences"
-    step_2: "Keep only project-specific content in each Project's Custom Instructions"
-    step_3: "Eliminate redundancy across projects"
-
-  global_preferences_guidance:
-    location: "Claude.ai Settings > Preferences (applies to ALL projects)"
-    character_limit: "~1500-2000 characters (verify exact limit)"
-    should_contain:
-      - "Two-Claude workflow basics (fetch/checkpoint commands)"
-      - "YAML format requirements"
-      - "Common infrastructure notes (Linode, refs.fergi.com)"
-      - "Communication style (SILENCE principle)"
-      - "Shared authority guidelines"
-
-  per_project_instructions:
-    should_contain_only:
-      - "Project identity (1-2 lines)"
-      - "Project-specific fetch URL"
-      - "Current status (brief)"
-      - "Project-specific context"
-    should_NOT_contain:
-      - "Repeated workflow explanations"
-      - "Generic infrastructure details"
-      - "Communication style (move to global)"
-      - "Anything already in Global Preferences"
-
-  target_lengths:
-    global_preferences: "~1000-1500 chars (stay under limit)"
-    per_project_instructions: "~500-800 chars each (down from current ~2000+)"
-
-  deliverables:
-    1: "Updated Global Preferences content"
-    2: "Concise FergiDotCom Project Instructions"
-    3: "Concise FamilyArchive Project Instructions"
-    4: "Concise ReferenceRefinement Project Instructions"
-    5: "Concise Cooking Project Instructions"
-    6: "Concise VideoDev Project Instructions"
-
-  format: "Provide as copyable text blocks, not file artifacts"
+  next_action: "Provide optimized instructions text if not already done"
 
 next_steps:
-  for_claude_ai:
-    1: "Check exact character limit for Global Settings > Preferences"
-    2: "Draft optimized Global Preferences (shared across all projects)"
-    3: "Draft concise per-project instructions (project-specific only)"
-    4: "Provide all as copyable text for user to paste"
+  for_user:
+    1: "Apply optimized Global Preferences in Claude.ai Settings"
+    2: "Apply optimized per-project instructions"
+    3: "Test fetch in a new Claude.ai conversation"
+
+  for_mac:
+    - "Use push-perspective-github.sh for future checkpoints"
+    - "Linode can remain as backup but GitHub is primary for Claude.ai"
