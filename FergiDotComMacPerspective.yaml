@@ -1,61 +1,47 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T17:00:00Z"
+timestamp: "2025-11-29T17:20:00Z"
 
 session_summary: |
-  Implemented GitHub-based perspective sharing as Claude.ai discovered
-  refs.fergi.com is blocked from web_fetch. Created fergidotcom/perspectives
-  repo and push script. All 5 MacPerspective files now accessible via
-  raw.githubusercontent.com.
+  Implemented GitHub-based perspective sharing. Claude.ai discovered
+  refs.fergi.com blocked from web_fetch. Created fergidotcom/perspectives
+  repo and push script. Fixed script to clean up Downloads after push.
 
 work_completed:
-  github_infrastructure:
-    - "Created repo: https://github.com/fergidotcom/perspectives"
-    - "Created push-perspective-github.sh script in Fergi directory"
-    - "Pushed all 5 MacPerspective files to GitHub"
-    - "Verified all 5 raw URLs return HTTP 200"
-
-  script_created:
-    path: "~/Library/CloudStorage/Dropbox/Fergi/push-perspective-github.sh"
-    usage: "./push-perspective-github.sh [ProjectName]"
-    features:
-      - "Copies perspective to GitHub repo"
-      - "Archives to Perspective-Archive/MacPerspectives/ with timestamp"
-      - "Commits and pushes to GitHub"
+  - "Created GitHub repo: fergidotcom/perspectives"
+  - "Created push-perspective-github.sh script"
+  - "Pushed all 5 MacPerspective files to GitHub"
+  - "Fixed script to delete from Downloads after successful push"
+  - "Cleaned up stale MacPerspective files from Downloads"
 
 current_state:
   status: "active"
-  fetch_infrastructure: "GitHub (replaces Linode for Claude.ai access)"
+  fetch_infrastructure: "GitHub raw URLs"
 
-  new_fetch_urls:
+  fetch_urls:
     FergiDotCom: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
     FamilyArchive: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
     ReferenceRefinement: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
     Cooking: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
     VideoDev: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
 
-  linode_status: "Still works for direct curl, but Claude.ai cannot access"
+  script_workflow:
+    command: "./push-perspective-github.sh [ProjectName]"
+    actions:
+      - "Archives to Perspective-Archive/MacPerspectives/ with timestamp"
+      - "Copies to perspectives-sync repo"
+      - "Commits and pushes to GitHub"
+      - "Deletes from Downloads"
 
 awaiting_from_user:
   - "Update Claude.ai Global Preferences with optimized content"
-  - "Update each project's Custom Instructions with concise version"
+  - "Update each project's Custom Instructions"
   - "Test fetch command in Claude.ai"
 
-for_claude_ai:
-  confirmation: "GitHub infrastructure complete and tested"
-
-  fetch_command_update: |
-    Update fetch protocol to use GitHub URLs:
-    https://raw.githubusercontent.com/fergidotcom/perspectives/main/[ProjectName]MacPerspective.yaml
-
-  next_action: "Provide optimized instructions text if not already done"
-
 next_steps:
+  for_claude_ai:
+    - "Confirm GitHub fetch URLs work"
+    - "Provide optimized instructions if not already done"
   for_user:
-    1: "Apply optimized Global Preferences in Claude.ai Settings"
-    2: "Apply optimized per-project instructions"
-    3: "Test fetch in a new Claude.ai conversation"
-
-  for_mac:
-    - "Use push-perspective-github.sh for future checkpoints"
-    - "Linode can remain as backup but GitHub is primary for Claude.ai"
+    - "Apply optimized instructions to Claude.ai"
+    - "Test fetch in new conversation"
