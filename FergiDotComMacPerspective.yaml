@@ -1,85 +1,98 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T17:45:00Z"
+timestamp: "2025-11-29T18:00:00Z"
 
 session_summary: |
-  Text replacement shortcuts created and imported by user. FetchFergi etc.
-  now expand to full fetch URLs in Claude.ai. Infrastructure complete.
-
-work_completed:
-  - "Created FergiFetchShortcuts.plist with 5 text replacements"
-  - "User imported shortcuts into macOS System Settings"
-  - "GitHub repo verified PUBLIC, all URLs return HTTP 200"
+  Text replacement shortcuts installed. GitHub infrastructure complete.
+  User needs optimized Claude.ai instructions.
 
 current_state:
   status: "active"
   fetch_infrastructure: "COMPLETE"
-  shortcuts_installed:
-    - "FetchFergi → fetch FergiDotComMacPerspective.yaml"
-    - "FetchArchive → fetch FamilyArchiveMacPerspective.yaml"
-    - "FetchReferences → fetch ReferenceRefinementMacPerspective.yaml"
-    - "FetchCooking → fetch CookingMacPerspective.yaml"
-    - "FetchVideo → fetch VideoDevMacPerspective.yaml"
+  github_repo: "fergidotcom/perspectives"
 
 for_claude_ai:
   priority: "HIGH"
-  task: "Generate Optimized Instructions"
-
-  request: |
-    Generate CONCISE instructions for Claude.ai. User will copy/paste these.
-    Minimize overhead while properly conditioning each project.
+  task: "Generate Optimized Claude.ai Instructions"
 
   deliverable_1:
-    name: "Global Settings > Preferences"
-    char_limit: "~1500 characters max"
-    should_contain:
-      - "Two-Claude workflow (Mac implements, Claude.ai plans)"
-      - "Fetch command: user types FetchX shortcut, you retrieve YAML"
-      - "Checkpoint command: generate ClaudePerspective.yaml artifact"
-      - "SILENCE principle (no preamble, direct action)"
-      - "Authority guidelines"
-      - "Infrastructure note (GitHub for perspectives)"
-    format: "Provide as single copyable text block"
+    name: "Global System > Preferences"
+    char_target: "Use nearly all 2000 characters available"
+
+    must_include:
+      - "Two-Claude workflow: Claude.ai plans/reviews, Mac Claude Code implements"
+      - "Fetch command: user provides GitHub raw URL, you retrieve and parse YAML"
+      - "Checkpoint command: generate [ProjectName]ClaudePerspective.yaml artifact"
+      - "YAML structure for perspectives (session_summary, work_completed, next_steps, for_mac)"
+      - "SILENCE principle: no preamble, direct action, concise responses"
+      - "Authority: Claude.ai decides architecture/design, Mac decides implementation"
+      - "Infrastructure: perspectives on GitHub (fergidotcom/perspectives repo)"
+      - "Context monitoring format for responses"
+      - "Project ecosystem: FergiDotCom, FamilyArchive, ReferenceRefinement, Cooking, VideoDev"
+
+    format: "Single copyable text block, labeled 'GLOBAL PREFERENCES'"
 
   deliverable_2:
-    name: "Per-Project Instructions (5 projects)"
-    char_target: "~400-600 chars each"
+    name: "Per-Project Custom Instructions"
+    char_target: "400-600 chars each, optimize for speed/efficiency"
+
     projects:
       FergiDotCom:
-        focus: "Meta-coordination, ecosystem oversight, cross-project infrastructure"
+        role: "Meta-coordination hub, cross-project infrastructure, ecosystem oversight"
+        fetch_url: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
+
       FamilyArchive:
-        focus: "Family tree, photo archive, voice/face integration, genealogy"
+        role: "Ferguson family genealogy, photo archive, tree visualization, voice/face AI"
+        fetch_url: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
+
       ReferenceRefinement:
-        focus: "Academic references, production app, Track B features"
+        role: "Academic reference management, AI-powered search, production app on Linode"
+        fetch_url: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
+
       Cooking:
-        focus: "Recipe management, Fergi Standard Format, production stable"
+        role: "Recipe collection, Fergi Standard Format, production stable"
+        fetch_url: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
+
       VideoDev:
-        focus: "Video processing, clustering, Whisper transcription, survey phase"
+        role: "Video processing pipeline, clustering, Whisper transcription, survey phase"
+        fetch_url: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
 
-    each_should_contain:
-      - "Project identity (1-2 lines)"
-      - "Current status"
-      - "Key context/blockers"
+    each_must_include:
+      - "Project name and role (1-2 lines)"
+      - "Fetch URL for this project"
+      - "Current status/phase"
+      - "Key focus areas"
 
-    each_should_NOT_contain:
-      - "Workflow mechanics (in Global Preferences)"
-      - "Fetch/checkpoint instructions (in Global Preferences)"
-      - "Generic communication style (in Global Preferences)"
+    each_must_NOT_include:
+      - "Workflow mechanics (already in Global Preferences)"
+      - "Generic instructions (already in Global Preferences)"
 
-    format: "Provide each as separate copyable text block with clear headers"
+    format: "5 separate copyable text blocks, each labeled with project name"
 
-  output_format: |
-    Provide 6 copyable text blocks:
-    1. GLOBAL PREFERENCES (copy to Settings > Preferences)
-    2. FERGIDOTCOM PROJECT INSTRUCTIONS
-    3. FAMILYARCHIVE PROJECT INSTRUCTIONS
-    4. REFERENCEREFINEMENT PROJECT INSTRUCTIONS
-    5. COOKING PROJECT INSTRUCTIONS
-    6. VIDEODEV PROJECT INSTRUCTIONS
+  output_structure: |
+    Provide exactly 6 text blocks:
+
+    === GLOBAL PREFERENCES (paste into Settings > Preferences) ===
+    [~2000 chars of optimized global instructions]
+
+    === FERGIDOTCOM PROJECT ===
+    [~500 chars]
+
+    === FAMILYARCHIVE PROJECT ===
+    [~500 chars]
+
+    === REFERENCEREFINEMENT PROJECT ===
+    [~500 chars]
+
+    === COOKING PROJECT ===
+    [~500 chars]
+
+    === VIDEODEV PROJECT ===
+    [~500 chars]
 
 next_steps:
   for_claude_ai:
-    1: "Generate all 6 text blocks"
-    2: "Keep Global Preferences under 1500 chars"
-    3: "Keep each project under 600 chars"
-    4: "Provide as copyable text, not artifacts"
+    1: "Generate all 6 text blocks as specified"
+    2: "Maximize Global Preferences (use ~2000 chars)"
+    3: "Keep project instructions concise but complete"
+    4: "Ensure consistent ecosystem feel across all projects"
