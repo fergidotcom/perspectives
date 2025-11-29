@@ -1,6 +1,6 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T20:20:00Z"
+timestamp: "2025-11-29T20:22:00Z"
 
 session_summary: |
   GitHub fetch workflow verified working by Claude.ai. This checkpoint
@@ -8,9 +8,9 @@ session_summary: |
   concise project instructions.
 
 sync_verification:
-  math_question: "What is 47 + 38?"
-  expected_answer: 85
-  purpose: "If Claude.ai answers 85, sync is verified working"
+  math_question: "What is 5 + 37 + 42?"
+  expected_answer: 84
+  purpose: "If Claude.ai answers 84, sync is verified working"
 
 current_state:
   status: "active"
@@ -50,7 +50,7 @@ for_claude_ai:
   then: "Generate the 6 text blocks for optimized instructions"
 
 next_steps:
-  1: "Claude.ai answers: 47 + 38 = ?"
-  2: "If 85, sync verified"
+  1: "Claude.ai answers: 5 + 37 + 42 = ?"
+  2: "If 84, sync verified"
   3: "Claude.ai generates 6 instruction text blocks"
   4: "User copies to Claude.ai Settings and Projects"
