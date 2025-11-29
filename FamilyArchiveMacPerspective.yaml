@@ -1,0 +1,218 @@
+project_name: "Ferguson Family Archive"
+perspective_source: "mac_claude_code"
+timestamp: "2025-11-28T15:40:00Z"
+version: "v2.5-bugfixes"
+
+session_summary: |
+  BUG FIX SESSION: Fixed three critical bugs reported from iPhone testing.
+
+  User reported:
+  1. "Face training does nothing"
+  2. "Add document fails" with screenshot showing "error parsing the body"
+  3. "Add document takes picture but then nothing happens"
+
+  All three bugs traced to issues with mobile upload flows and large file handling.
+  All fixes deployed to production.
+
+work_completed:
+  bugs_fixed:
+    - bug: "AI Document Analysis 'error parsing the body'"
+      symptom: "Screenshot showed 'Analysis failed: There was an error parsing the body'"
+      root_cause: |
+        Large base64-encoded images in JSON body exceeded FastAPI body size limits.
+        A 5MB photo becomes ~7MB when base64 encoded, causing parsing failures.
+      fix: |
+        Added new endpoint POST /api/v1/ai/analyze/document/upload that accepts
+        file uploads directly via multipart/form-data instead of base64 in JSON.
+        Updated frontend analyzeDocumentWithAI() to use FormData file upload.
+      files_changed:
+        - "backend/api/ai.py - Added /analyze/document/upload endpoint"
+        - "prototype/family-member-modal-functions.js - Updated to use file upload"
+
+    - bug: "Face Training does nothing"
+      symptom: "User uploads photo, nothing visible happens"
+      root_cause: |
+        When DeepFace isn't installed on server, the recognition endpoint returns 503.
+        Frontend was falling back silently to media upload without telling the user.
+        No feedback about what was actually happening.
+      fix: |
+        - Detect 503 response and show "Face recognition not available on server"
+        - Show warning if no face detected in image
+        - Display quality score and sample count on success
+        - Clear messaging for all failure modes
+      files_changed:
+        - "prototype/family-member-modal-functions.js - Rewrote cropAndContinue()"
+
+    - bug: "Add Document shows nothing after photo selection"
+      symptom: "Take photo or select from camera roll, then nothing visible"
+      root_cause: |
+        DUPLICATE ELEMENT IDs! Two elements with id="documentPhotoInput":
+        - Line 1279: Modal version -> updates fmDocumentPreview, fmDocumentPreviewImage
+        - Line 1787: Mobile version -> should update documentPreviewSection, documentPreviewImage
+
+        handleDocumentSelected() always updated MODAL elements, but mobile view
+        uses DIFFERENT element IDs. Preview was being shown in hidden modal.
+      fix: |
+        - Renamed mobile input to id="mobileDocumentPhotoInput"
+        - Created triggerMobileDocumentCamera() for mobile button
+        - Created handleMobileDocumentSelected() that updates mobile-specific elements
+        - Updated resetDocumentUploadForm() to safely reset both sets of elements
+      files_changed:
+        - "prototype/index.html - Renamed mobile input, updated onclick handler"
+        - "prototype/family-member-modal-functions.js - Added mobile handler functions"
+
+  files_modified:
+    - path: "family-archive-system/backend/api/ai.py"
+      changes: |
+        - Added _build_analysis_prompt() helper function
+        - Added _parse_analysis_response() helper function
+        - Added POST /api/v1/ai/analyze/document/upload endpoint
+          - Accepts: file (UploadFile), person_name, person_birth_date, person_death_date, person_generation
+          - Returns: DocumentAnalysisResponse (same as original endpoint)
+          - Max file size: 20MB
+          - More reliable than base64 JSON for large images
+        - Original /analyze/document endpoint still works for smaller images
+
+    - path: "family-archive-system/prototype/family-member-modal-functions.js"
+      changes: |
+        - analyzeDocumentWithAI(): Now uses FormData file upload instead of base64 JSON
+        - cropAndContinue(): Complete rewrite with proper error handling:
+          - Checks result.success AND result.face_detected
+          - Shows "DeepFace not installed" error when 503 received
+          - Shows "No face detected" warning with message
+          - Displays quality score (excellent/good/acceptable) on success
+          - Shows sample count (X/10 samples) on success
+          - Clear fallback messaging when using media upload
+        - resetDocumentUploadForm(): Now safely resets both modal and mobile elements
+        - NEW: triggerMobileDocumentCamera() - clicks mobile file input
+        - NEW: handleMobileDocumentSelected() - processes mobile photo selection
+          - Updates documentPreviewSection and documentPreviewImage
+          - Also updates aiDocumentImage for later AI analysis
+
+    - path: "family-archive-system/prototype/index.html"
+      changes: |
+        - Line 1787: Changed id="documentPhotoInput" to id="mobileDocumentPhotoInput"
+        - Line 1783: Changed onclick to triggerMobileDocumentCamera()
+        - Line 1787: Changed onchange to handleMobileDocumentSelected()
+
+  deployments:
+    - timestamp: "2025-11-28T14:58:00Z"
+      changes: "AI analysis file upload endpoint + face training error handling"
+
+    - timestamp: "2025-11-28T15:32:00Z"
+      changes: "Mobile document upload fix (duplicate ID issue)"
+
+current_state:
+  status: "production"
+  production_url: "https://archive.fergi.com"
+  api_docs: "https://archive.fergi.com/docs"
+
+  what_works:
+    - "Family tree visualization (41 members)"
+    - "Person CRUD operations"
+    - "Leaderboard system with Christmas 2025 Challenge"
+    - "Review Queue UI"
+    - "AI Document Analysis via file upload endpoint"
+    - "Mobile document upload with proper preview display"
+    - "Face training with proper error messages"
+    - "Voice training uploads"
+    - "Mass import to sandbox"
+
+  what_needs_testing:
+    - "AI Document Analysis on iPhone - new file upload should work for large images"
+    - "Mobile Add Document - preview should now appear after photo selection"
+    - "Face Training - should show clear error about DeepFace not installed"
+
+  known_server_state:
+    - "ANTHROPIC_API_KEY: Should be configured for AI analysis"
+    - "DeepFace: NOT INSTALLED - face training will show error (expected)"
+    - "SSL: HTTPS working with Let's Encrypt certificate"
+
+context_notes:
+  - "User tests ONLY on iPhone - cannot test locally"
+  - "Auto-deploy policy: Deploy every change immediately without asking"
+  - "Three bugs were interconnected - all related to mobile upload flows"
+  - "DeepFace not installed on server is expected behavior for now"
+
+technical_details:
+  new_api_endpoint: |
+    POST /api/v1/ai/analyze/document/upload
+    Content-Type: multipart/form-data
+
+    Form Fields:
+    - file: UploadFile (required) - The image file to analyze
+    - person_name: str (optional) - Person's full name for context
+    - person_birth_date: str (optional) - Birth date
+    - person_death_date: str (optional) - Death date
+    - person_generation: int (optional) - Generation number
+
+    Returns: DocumentAnalysisResponse
+    - success: bool
+    - ai_available: bool
+    - document_type: str
+    - extracted_text: str
+    - key_information: {dates: [], names: [], places: [], events: []}
+    - historical_significance: str
+    - suggested_tags: []
+    - ai_summary: str
+    - error: str (if failed)
+
+  mobile_document_flow: |
+    BEFORE (broken):
+    1. User taps "Take or Choose Document"
+    2. triggerDocumentCamera() clicks documentPhotoInput (WRONG - gets modal one)
+    3. handleDocumentSelected() updates fmDocumentPreview (HIDDEN modal elements)
+    4. User sees nothing
+
+    AFTER (fixed):
+    1. User taps "Take or Choose Document"
+    2. triggerMobileDocumentCamera() clicks mobileDocumentPhotoInput (CORRECT)
+    3. handleMobileDocumentSelected() updates documentPreviewSection (VISIBLE mobile elements)
+    4. User sees preview with Analyze/Save buttons
+
+  face_training_error_handling: |
+    BEFORE:
+    - 503 from server -> silent fallback to media upload -> "Photo saved" (confusing)
+
+    AFTER:
+    - 503 from server -> "Face recognition not available. Contact admin."
+    - No face detected -> "No face detected. Please use clear photo."
+    - Success -> "Face training saved! Quality: excellent (5/10 samples)"
+
+blockers:
+  - issue: "DeepFace not installed on Linode server"
+    impact: "Face training shows error instead of extracting embeddings"
+    workaround: "Error message tells user face recognition unavailable"
+    resolution: "pip install deepface tf-keras on server when ready"
+
+next_steps:
+  immediate:
+    - "User tests mobile Add Document - should see preview now"
+    - "User tests AI analysis - large photos should work"
+    - "User tests face training - should see clear error message"
+
+  if_issues_persist:
+    - "Check browser console for JavaScript errors"
+    - "Verify ANTHROPIC_API_KEY set on server for AI analysis"
+    - "Check server logs: ssh linode-fergi 'sudo journalctl -u family-archive -n 50'"
+
+  future_enhancements:
+    - "Install DeepFace on server for face embedding extraction"
+    - "Add capture='camera' to mobile input for direct camera access"
+    - "Consider client-side image resize before upload for faster processing"
+
+server_info:
+  host: "96.126.113.99"
+  domain: "archive.fergi.com"
+  ssh_alias: "linode-fergi"
+  service_name: "family-archive"
+  logs: "ssh linode-fergi 'sudo journalctl -u family-archive -f'"
+  restart: "ssh linode-fergi 'sudo systemctl restart family-archive'"
+
+session_metadata:
+  date: "2025-11-28"
+  session_type: "bug_fix"
+  bugs_reported: 3
+  bugs_fixed: 3
+  deployments: 2
+  context_usage: "~10% of session"
