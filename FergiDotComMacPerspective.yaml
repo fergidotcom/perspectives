@@ -1,47 +1,85 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T17:30:00Z"
+timestamp: "2025-11-29T17:45:00Z"
 
 session_summary: |
-  Verified GitHub repo is PUBLIC and all files accessible. Claude.ai's
-  web_fetch requires user-provided URLs (repo too new for search indexing).
+  Text replacement shortcuts created and imported by user. FetchFergi etc.
+  now expand to full fetch URLs in Claude.ai. Infrastructure complete.
 
-verification_results:
-  repo: "fergidotcom/perspectives"
-  visibility: "PUBLIC"
-  branch: "main"
-  files_present:
-    - "FergiDotComMacPerspective.yaml"
-    - "FamilyArchiveMacPerspective.yaml"
-    - "ReferenceRefinementMacPerspective.yaml"
-    - "CookingMacPerspective.yaml"
-    - "VideoDevMacPerspective.yaml"
-  raw_url_test: "HTTP 200"
-
-working_raw_urls:
-  FergiDotCom: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
-  FamilyArchive: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
-  ReferenceRefinement: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
-  Cooking: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
-  VideoDev: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
+work_completed:
+  - "Created FergiFetchShortcuts.plist with 5 text replacements"
+  - "User imported shortcuts into macOS System Settings"
+  - "GitHub repo verified PUBLIC, all URLs return HTTP 200"
 
 current_state:
   status: "active"
-  infrastructure: "Complete and verified"
-  blocker: "Claude.ai web_fetch security model requires user-provided URLs"
+  fetch_infrastructure: "COMPLETE"
+  shortcuts_installed:
+    - "FetchFergi → fetch FergiDotComMacPerspective.yaml"
+    - "FetchArchive → fetch FamilyArchiveMacPerspective.yaml"
+    - "FetchReferences → fetch ReferenceRefinementMacPerspective.yaml"
+    - "FetchCooking → fetch CookingMacPerspective.yaml"
+    - "FetchVideo → fetch VideoDevMacPerspective.yaml"
 
 for_claude_ai:
-  confirmation: "Repo is PUBLIC, all URLs return HTTP 200"
+  priority: "HIGH"
+  task: "Generate Optimized Instructions"
 
-  workaround: |
-    User must paste URL in chat to make it "user-provided":
-    fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml
+  request: |
+    Generate CONCISE instructions for Claude.ai. User will copy/paste these.
+    Minimize overhead while properly conditioning each project.
 
-for_user:
-  action: "Paste the fetch command with full URL in Claude.ai chat"
-  example: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
+  deliverable_1:
+    name: "Global Settings > Preferences"
+    char_limit: "~1500 characters max"
+    should_contain:
+      - "Two-Claude workflow (Mac implements, Claude.ai plans)"
+      - "Fetch command: user types FetchX shortcut, you retrieve YAML"
+      - "Checkpoint command: generate ClaudePerspective.yaml artifact"
+      - "SILENCE principle (no preamble, direct action)"
+      - "Authority guidelines"
+      - "Infrastructure note (GitHub for perspectives)"
+    format: "Provide as single copyable text block"
+
+  deliverable_2:
+    name: "Per-Project Instructions (5 projects)"
+    char_target: "~400-600 chars each"
+    projects:
+      FergiDotCom:
+        focus: "Meta-coordination, ecosystem oversight, cross-project infrastructure"
+      FamilyArchive:
+        focus: "Family tree, photo archive, voice/face integration, genealogy"
+      ReferenceRefinement:
+        focus: "Academic references, production app, Track B features"
+      Cooking:
+        focus: "Recipe management, Fergi Standard Format, production stable"
+      VideoDev:
+        focus: "Video processing, clustering, Whisper transcription, survey phase"
+
+    each_should_contain:
+      - "Project identity (1-2 lines)"
+      - "Current status"
+      - "Key context/blockers"
+
+    each_should_NOT_contain:
+      - "Workflow mechanics (in Global Preferences)"
+      - "Fetch/checkpoint instructions (in Global Preferences)"
+      - "Generic communication style (in Global Preferences)"
+
+    format: "Provide each as separate copyable text block with clear headers"
+
+  output_format: |
+    Provide 6 copyable text blocks:
+    1. GLOBAL PREFERENCES (copy to Settings > Preferences)
+    2. FERGIDOTCOM PROJECT INSTRUCTIONS
+    3. FAMILYARCHIVE PROJECT INSTRUCTIONS
+    4. REFERENCEREFINEMENT PROJECT INSTRUCTIONS
+    5. COOKING PROJECT INSTRUCTIONS
+    6. VIDEODEV PROJECT INSTRUCTIONS
 
 next_steps:
-  - "User tests fetch with pasted URL in Claude.ai"
-  - "If works, update project instructions with this workaround"
-  - "Long-term: repo may become searchable after GitHub indexes it"
+  for_claude_ai:
+    1: "Generate all 6 text blocks"
+    2: "Keep Global Preferences under 1500 chars"
+    3: "Keep each project under 600 chars"
+    4: "Provide as copyable text, not artifacts"
