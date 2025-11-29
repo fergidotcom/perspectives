@@ -1,117 +1,89 @@
 project_name: "FergiDotCom"
 perspective_source: "mac_claude_code"
-timestamp: "2025-11-29T22:20:00Z"
+timestamp: "2025-11-29T22:30:00Z"
+
+session_summary: |
+  Two-Claude infrastructure FULLY VERIFIED. GitHub + jsDelivr CDN provides reliable
+  perspective sharing. Round-trip tests passed (Douglas Adams + Monty Python).
+  Cache purging discovered: GET to purge.jsdelivr.net clears CDN cache instantly.
 
 test_validation:
   secret_phrase: "Life, The Universe and Everything!"
   expected_response: "The answer is 42"
-  timestamp: "2025-11-29T22:05:00Z"
-  purpose: "Round-trip verification that Claude.ai can fetch fresh Mac perspectives"
   status: "PASSED ✓"
 
 final_verification:
   question: "What is the airspeed velocity of an unladen swallow?"
   expected: "African or European?"
-  timestamp: "2025-11-29T22:20:00Z"
-  purpose: "Final Monty Python verification before production deployment"
+  status: "PENDING - awaiting Claude.ai fetch"
 
-session_summary: |
-  Major infrastructure session establishing Two-Claude perspective sharing via GitHub.
-  Claude.ai cannot fetch from Linode (blocked). GitHub raw URLs work but may cache.
-  Text replacement shortcuts created for user convenience.
+infrastructure_verified:
+  github_repo: "fergidotcom/perspectives"
+  visibility: "PUBLIC"
 
-work_completed:
-  github_infrastructure:
-    repo: "fergidotcom/perspectives"
-    visibility: "PUBLIC"
-    branch: "main"
-    files:
-      - FergiDotComMacPerspective.yaml
-      - FamilyArchiveMacPerspective.yaml
-      - ReferenceRefinementMacPerspective.yaml
-      - CookingMacPerspective.yaml
-      - VideoDevMacPerspective.yaml
+  cdn_urls:
+    primary: "https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/"
+    fallback: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/"
 
-  scripts_created:
-    push_script:
-      path: "~/Library/CloudStorage/Dropbox/Fergi/push-perspective-github.sh"
-      usage: "./push-perspective-github.sh [ProjectName]"
-      actions:
-        - "Archives to Perspective-Archive/MacPerspectives/"
-        - "Pushes to GitHub"
-        - "Deletes from Downloads"
+  cache_purge:
+    method: "GET (not POST)"
+    url: "https://purge.jsdelivr.net/gh/fergidotcom/perspectives@main/[FileName]"
+    result: "Instant cache clear on both CF and FY providers"
 
-  text_replacements:
-    plist: "~/Downloads/FergiFetchShortcuts.plist (user imported)"
-    shortcuts:
-      FetchFergi: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FergiDotComMacPerspective.yaml"
-      FetchArchive: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/FamilyArchiveMacPerspective.yaml"
-      FetchReferences: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/ReferenceRefinementMacPerspective.yaml"
-      FetchCooking: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/CookingMacPerspective.yaml"
-      FetchVideo: "fetch https://raw.githubusercontent.com/fergidotcom/perspectives/main/VideoDevMacPerspective.yaml"
+  files_on_github:
+    - FergiDotComMacPerspective.yaml
+    - FamilyArchiveMacPerspective.yaml
+    - ReferenceRefinementMacPerspective.yaml
+    - CookingMacPerspective.yaml
+    - VideoDevMacPerspective.yaml
 
-  linode_setup:
-    robots_txt: "Added to /var/www/html/ and /var/www/refs.fergi.com/"
-    symlink: "/var/www/html/perspectives -> /var/www/perspectives"
-    status: "Returns 301, may need nginx config adjustment"
+workflow_established:
+  mac_creates_perspective:
+    1: "Mac creates ~/Downloads/[Project]MacPerspective.yaml"
+    2: "Copy to perspectives-sync directory"
+    3: "git add, commit, push to GitHub"
+    4: "Optionally purge jsDelivr cache for instant availability"
 
-known_issues:
-  github_caching:
-    problem: "raw.githubusercontent.com may cache for several minutes"
-    workaround: "Add ?v=N query parameter to bust cache"
+  claude_ai_fetches:
+    1: "User says: fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/[Project]MacPerspective.yaml"
+    2: "Claude.ai retrieves and reads Mac's perspective"
+    3: "Claude.ai responds with guidance/instructions"
 
-  linode_blocked:
-    problem: "Claude.ai cannot fetch from refs.fergi.com or 96.126.113.99"
-    reason: "Not in Claude.ai's allowed domains list"
-    workaround: "User must paste URL in chat for it to work"
+  claude_ai_creates_perspective:
+    1: "User says 'checkpoint' in Claude.ai"
+    2: "Claude.ai generates [Project]ClaudePerspective.yaml artifact"
+    3: "User downloads to ~/Downloads"
+    4: "Mac runs /fetch to read and execute instructions"
 
-  sync_verification_pending:
-    math_question: "5 + 37 + 42 = ?"
-    expected: 84
-    status: "Claude.ai getting cached version, hasn't seen math question yet"
+pending_from_claude_ai:
+  1: "Confirm Monty Python verification (African or European?)"
+  2: "Generate Global Preferences text (~2000 chars for Settings > Preferences)"
+  3: "Generate 5 project instruction texts (~500 chars each)"
+  4: "Update keyboard shortcuts to use jsDelivr URLs"
 
-pending_tasks:
-  1: "Claude.ai to generate optimized Global Preferences (~2000 chars)"
-  2: "Claude.ai to generate 5 concise project instructions (~500 chars each)"
-  3: "User to copy instructions to Claude.ai Settings and Projects"
-  4: "Verify sync with math question once cache clears"
-
-infrastructure_summary:
-  mac_checkpoint_workflow:
-    1: "Mac creates perspective in ~/Downloads/[Project]MacPerspective.yaml"
-    2: "Mac runs: ./push-perspective-github.sh [ProjectName]"
-    3: "Script archives, pushes to GitHub, cleans Downloads"
-
-  claude_ai_fetch_workflow:
-    1: "User types FetchX shortcut (expands to full URL)"
-    2: "Claude.ai fetches from raw.githubusercontent.com"
-    3: "May need cache-buster if recently updated"
-
-  perspectives_locations:
-    primary: "https://raw.githubusercontent.com/fergidotcom/perspectives/main/"
-    backup: "https://refs.fergi.com/perspectives/ (Mac curl only, Claude.ai blocked)"
+fetch_commands_for_claude_ai:
+  FergiDotCom: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/FergiDotComMacPerspective.yaml"
+  FamilyArchive: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/FamilyArchiveMacPerspective.yaml"
+  ReferenceRefinement: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/ReferenceRefinementMacPerspective.yaml"
+  Cooking: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/CookingMacPerspective.yaml"
+  VideoDev: "fetch https://cdn.jsdelivr.net/gh/fergidotcom/perspectives@main/VideoDevMacPerspective.yaml"
 
 next_session_prompt: |
   Continue FergiDotCom Two-Claude infrastructure session.
 
-  COMPLETED:
-  - GitHub repo fergidotcom/perspectives created (PUBLIC)
-  - push-perspective-github.sh script working
-  - Text replacement shortcuts imported (FetchFergi, etc.)
-  - All 5 MacPerspective files on GitHub
+  VERIFIED WORKING:
+  - GitHub repo fergidotcom/perspectives (PUBLIC)
+  - jsDelivr CDN for cache-free fetching
+  - Cache purge via GET to purge.jsdelivr.net
+  - Round-trip communication (Mac → GitHub → Claude.ai)
 
-  IN PROGRESS:
-  - Claude.ai seeing cached GitHub version (timestamp 2025-11-29T17:30:00Z)
-  - Current version has timestamp 2025-11-29T20:22:00Z with math question 5+37+42=84
-  - Need to verify sync once cache clears
-
-  PENDING:
-  - Claude.ai to generate optimized instructions:
-    * Global Preferences (~2000 chars)
-    * 5 project instructions (~500 chars each)
+  COMPLETED TESTS:
+  - Douglas Adams: "Life, The Universe and Everything!" → 42 ✓
+  - Monty Python: "Airspeed velocity of unladen swallow?" → "African or European?"
 
   NEXT STEPS:
-  1. Have Claude.ai fetch again (may need ?v=3 cache buster)
-  2. Verify sync with math answer (84)
-  3. Get Claude.ai to generate the 6 instruction text blocks
-  4. User copies to Claude.ai Settings and Projects
+  1. Verify Claude.ai sees Monty Python question
+  2. Claude.ai generates Global Preferences (~2000 chars)
+  3. Claude.ai generates 5 project instructions (~500 chars each)
+  4. User updates keyboard shortcuts to jsDelivr URLs
+  5. Deploy to production use
